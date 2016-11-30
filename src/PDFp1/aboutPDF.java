@@ -49,7 +49,7 @@ public class aboutPDF extends JFrame{
 		jtf.setFont(new Font("Arial", Font.PLAIN, 15));
 		j1.setFont(new Font("Arial Black", Font.PLAIN, 36));
 
-		jtf.setText("Tiny PDF is a lighweight PDF viewer and spliting/merging tool developed in JAVA prgramming language. This is not a complete PDF suite but can only be used for minor works specifically on PDF files.\n\nThis is a small project made by the author Sameer Satyam while learning JAVA Prgramming Language and Swing/Awt GUI libraries.\n\nLinks:- \nGithub Repo - \nEmail - \n\nPlease read ReadMe file for more information. Thanks for using and trying this tiny software. :)");
+		jtf.setText("Tiny PDF is a lighweight PDF viewer and spliting/merging tool developed in JAVA prgramming language. This is not a complete PDF suite but can only be used for minor works specifically on PDF files.\n\nThis is a small project made by the author Sameer Satyam while learning JAVA Prgramming Language and Swing/Awt GUI libraries.\n\nLinks:- \nGithub Repo - https://github.com/satyamsameer/TinyPDF \nEmail - sameersatyam01@gmail.com \n\nPlease read ReadMe file for more information. Thanks for using and trying this tiny software. :)");
 
 		scroll = new JScrollPane(jtf,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		scroll.setBounds(10, 80, 374, 270);
