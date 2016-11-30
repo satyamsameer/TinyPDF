@@ -63,8 +63,8 @@ Some screen shots of TinyPDF GUI interfaces.
 
 * [Java JDK 8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html) - Java Development Kit
 * [Eclipse](http://www.eclipse.org/downloads/packages/eclipse-ide-java-developers/lunasr2) - IDE for Java and many other languages
-* [iText] - (http://developers.itextpdf.com/downloads) - API for editing PDFs
-* [PDF Renderer] - (https://java.net/projects/pdf-renderer) - API for rendering and working with PDF files
+* [iText](http://developers.itextpdf.com/downloads) - API for editing PDFs
+* [PDF Renderer](https://java.net/projects/pdf-renderer) - API for rendering and working with PDF files
 * [Git SCM](https://git-scm.com/downloads) - Online Repository Host Github
 
 ## Contributing
