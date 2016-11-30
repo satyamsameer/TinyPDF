@@ -86,6 +86,6 @@ This project is licensed under the GNU License
 ## Acknowledgments
 
 * This is my second project while learning JAVA and software development.
-* Buffer memory is not implemented so PDF may not load incomplete.
+* Buffer memory is not implemented so PDF may load incomplete.
 * Bugs, Errors, Code duplications and Code optimizations are welcome.
 
