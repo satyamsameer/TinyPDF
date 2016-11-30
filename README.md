@@ -73,7 +73,7 @@ Some screen shots of TinyPDF GUI interfaces.
 
 ## Version
 
-Curently Initial version v1.0
+Currently Initial version v1.0
 
 ## Authors
 
