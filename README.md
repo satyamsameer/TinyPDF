@@ -81,7 +81,7 @@ Sameer Satyam - Second Project - [satyamsameer](https://github.com/satyamsameer)
 
 ## License
 
-This project is licensed under the GNU License
+This project is licensed under the [MIT License] (https://github.com/satyamsameer/TinyPDF/blob/master/LICENSE.md)
 
 ## Acknowledgments
 
