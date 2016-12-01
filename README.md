@@ -43,11 +43,11 @@ Note: If you want the .jar executable file export the build using Eclipse.
 * Easily navigable pages with page number and Next, Previous, Last and First goto page buttons
 * Full Screen mode
 * Magnifier and fit to screen feature for a PDF page
-* Single PDF file splitting menas cutting out a one or more pages and make new PDF files from them
+* Single PDF file splitting means cutting out a one or more pages and make new PDF files from them
 * Splitter interface is simple for usability
 * Merging two or more PDF files
 * Simple Merging interface for usbability and with a status notification text area
-* About window for no reason
+* About window because it should be included
 
 ## Screen Shots
 
