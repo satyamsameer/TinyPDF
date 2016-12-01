@@ -248,6 +248,7 @@ public class mergePDF extends JFrame implements KeyListener {
 	 */
 	public void choose_dir(){
 		JFileChooser chooser = new JFileChooser();
+		boolean Check=true;
 		boolean test=false;
 		if(!t2.getText().equals("")&&test==false){
 			if(new File(t2.getText()).isFile()){
@@ -268,9 +269,23 @@ public class mergePDF extends JFrame implements KeyListener {
 		chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 		chooser.setAcceptAllFileFilterUsed(false);
 		if (chooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
-			jtf.setText("Ready");
-			t2.setText(chooser.getSelectedFile().getAbsolutePath().toString());
+			if(new File(chooser.getSelectedFile().getAbsolutePath().toString()).isDirectory()){
+				String newname=JOptionPane.showInputDialog(null,"Enter new PDF file name", "newpdf");
+				if(newname!=null&&!newname.equals("")){
+					if(newname.endsWith(".pdf")){
+						t2.setText(chooser.getSelectedFile().getAbsolutePath().toString()+"\\"+newname);
+					}else{
+						t2.setText(chooser.getSelectedFile().getAbsolutePath().toString()+"\\"+newname+".pdf");
+					}
+					jtf.setText("Ready");
+				}else if(newname==null){
+					Check=true;
+				}else{
+					Check=false;
+				}
+			}
 		}
+		if(Check==false){choose_dir();}
 	}
 
 	/**
@@ -281,8 +296,22 @@ public class mergePDF extends JFrame implements KeyListener {
 		if(t3.getText().equals("")){
 			chooser.setCurrentDirectory(new java.io.File(""));
 		}else{
-			String[] files =t3.getText().split(";");
-			chooser.setCurrentDirectory(new java.io.File(files[0]));
+			if(t3.getText().contains(".pdf")){
+				if(t3.getText().contains(";")){
+					String[] files =t3.getText().split(";");
+					if(checkPDF(files[0])){
+						chooser.setCurrentDirectory(new java.io.File(files[0]));
+					}else{
+						chooser.setCurrentDirectory(new java.io.File(""));
+					}
+				}else{
+					if(checkPDF(t3.getText())){
+						chooser.setCurrentDirectory(new java.io.File(t3.getText()));
+					}else{
+						chooser.setCurrentDirectory(new java.io.File(""));
+					}
+				}
+			}
 		}
 		chooser.setDialogTitle("Choose file path with file name");
 		chooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
