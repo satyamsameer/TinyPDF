@@ -302,6 +302,7 @@ public class mergePDF extends JFrame implements KeyListener {
 				i+=1;
 			}
 			t3.setText(x);
+			jtf.setText("Ready");
 		}
 	}
 
