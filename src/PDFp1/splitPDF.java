@@ -14,6 +14,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -82,7 +83,9 @@ public class splitPDF extends JFrame implements KeyListener {
 	
 	/** The chk. */
 	JCheckBox chk; 
-
+	
+	/** The scroll */
+	JScrollPane scroll;
 	/**
 	 * Instantiates a new split PDF.
 	 */
@@ -121,11 +124,17 @@ public class splitPDF extends JFrame implements KeyListener {
 		b1.setBounds(16,251,140,58);
 
 		jtf=new JTextArea("Ready");
-		jtf.setBounds(10,320,374,40);
+		jtf.setBounds(10,320,374,46);
 		jtf.setEditable(false);
-		jtf.setFont(new Font("Arial", Font.PLAIN, 15));
+		jtf.setFont(new Font("Arial", Font.PLAIN, 12));
 		jtf.setToolTipText("Status of Splitting");
+		jtf.setLineWrap(true);
+		jtf.setWrapStyleWord(true);
 		getContentPane().setLayout(null);
+		
+		scroll = new JScrollPane(jtf,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		scroll.setAutoscrolls(true);
+		scroll.setBounds(10,320,374,46);
 
 		chk=new JCheckBox("Enter ',' separated page numbers");
 		chk.setToolTipText("<html>Check to enter ',' seperated page numbers<br> only in From field</html>");
@@ -134,7 +143,7 @@ public class splitPDF extends JFrame implements KeyListener {
 
 		getContentPane().add(t1);
 		getContentPane().add(t2);getContentPane().add(t4);getContentPane().add(j1);getContentPane().add(j2);getContentPane().add(j4);getContentPane().add(bc1);getContentPane().add(bc2);getContentPane().add(b1);
-		getContentPane().add(jtf);getContentPane().add(chk);getContentPane().add(j5);
+		getContentPane().add(scroll);getContentPane().add(chk);getContentPane().add(j5);
 
 		JLabel lblTo = new JLabel("TO");
 		lblTo.setBounds(247, 194, 27, 31);
@@ -160,28 +169,28 @@ public class splitPDF extends JFrame implements KeyListener {
 		t4.addFocusListener(new FocusListener() {
 			@Override
 			public void focusGained(FocusEvent e) {
+				if(t4.getText().equals("Write here")||t4.getText().equals("From")){
 				t4.setText(""); // Empty the text field when it receives focus
+				}
 			}
 			@Override
 			public void focusLost(FocusEvent e) {
-				// You could do something here when the field loses focus, if you like
-				if(t4.getText().equals("")){
-					if(chk.isSelected()){
-						t4.setText("Write here");
-					}else{
-						t4.setText("From");
-					}
+				if(t4.getText().equals("")&&chk.isSelected()){
+					t4.setText("Write here");
+				}else if(t4.getText().equals("")){
+					t4.setText("From");
 				}
 			}
 		});
 		t5.addFocusListener(new FocusListener() {
 			@Override
 			public void focusGained(FocusEvent e) {
-				t5.setText(""); // Empty the text field when it receives focus
+				if(t5.getText().equals("To")){
+					t5.setText(""); // Empty the text field when it receives focus
+				}
 			}
 			@Override
 			public void focusLost(FocusEvent e) {
-				// You could do something here when the field loses focus, if you like
 				if(t5.getText().equals("")){
 					t5.setText("To");
 				}
@@ -193,9 +202,12 @@ public class splitPDF extends JFrame implements KeyListener {
 					t5.setText("");
 					t4.setText("Write here");
 					t5.setEnabled(false);
+					t4.setToolTipText("Enter ',' separated page numbers or a single page number here");
 				}else{
 					t5.setEnabled(true);
 					t5.setText("To");t4.setText("From");
+					t5.setToolTipText("Ending page number");
+					t4.setToolTipText("Starting page number");
 				}
 			}
 		});
@@ -210,7 +222,7 @@ public class splitPDF extends JFrame implements KeyListener {
 	public boolean checknumber(String text){
 		boolean isNumber=false;
 		try {
-			double d = Double.parseDouble(text);
+			int d = Integer.parseInt(text);
 			if(d>0){
 				isNumber=true;
 			}
@@ -233,77 +245,68 @@ public class splitPDF extends JFrame implements KeyListener {
 			if(e.getSource()==b1){
 				if(t1.getText().equals("")||t2.getText().equals("")){
 					JOptionPane.showMessageDialog(null,"Required fields are empty! ", "Attention!", JOptionPane.ERROR_MESSAGE);	
-				}
-				else if(t4.getText().equals("")&&t5.getText().equals("")){
-					JOptionPane.showMessageDialog(null,"Both limits should not be empty! ", "Attention!", JOptionPane.ERROR_MESSAGE);	
-				}
-				else
-				{
-					if(!t4.getText().equals("")&&!t5.getText().equals("")){
-
-						if(t4.getText().contains(",")&&t5.getText().contains(",")){
-							JOptionPane.showMessageDialog(null,"Write ',' terms in only one box and other leave empty! ", "Attention!", JOptionPane.ERROR_MESSAGE);
-						}else if(!t4.getText().contains(",")&&!t5.getText().contains(",")){
-
-							if(checknumber(t4.getText())&&checknumber(t5.getText())){
-
-								String x=t4.getText();
-								String y=t5.getText();
-								//System.out.println(x[0]+"-"+x[1]);
-								int i=Integer.parseInt(x);
-								int j=Integer.parseInt(y);
-								if(i<=j){
-									String[] s=new String[(j-i)+1];
-									int k=0;
-									while(i<=j){
-										//System.out.println(Integer.toString(i));
-										s[k]=Integer.toString(i);
-										i+=1;
-										k+=1;
-									}
-									splitpdf(s);
-								}else{
-									JOptionPane.showMessageDialog(null,"First is greater than the second please check in Page limits! ", "Attention!", JOptionPane.ERROR_MESSAGE);
-								}
+				}else{
+					if(!chk.isSelected()){
+						if(!t4.getText().equals("")&&!t5.getText().equals("")){
+							if(t4.getText().contains(",")||t5.getText().contains(",")){
+								JOptionPane.showMessageDialog(null,"First click on checkbox to use ',' feature! ", "Attention!", JOptionPane.ERROR_MESSAGE);
 							}else{
-								JOptionPane.showMessageDialog(null,"Incompatible page number provided! ", "Attention!", JOptionPane.ERROR_MESSAGE);
+								if(checknumber(t4.getText())&&checknumber(t5.getText())){
+	
+									String x=t4.getText();
+									String y=t5.getText();
+									//System.out.println(x[0]+"-"+x[1]);
+									int i=Integer.parseInt(x);
+									int j=Integer.parseInt(y);
+									if(i<=j){
+										String[] s=new String[(j-i)+1];
+										int k=0;
+										while(i<=j){
+											//System.out.println(Integer.toString(i));
+											s[k]=Integer.toString(i);
+											i+=1;
+											k+=1;
+										}
+										splitpdf(s);
+									}else{
+										JOptionPane.showMessageDialog(null,"First is greater than the second please check in Page limits! ", "Attention!", JOptionPane.ERROR_MESSAGE);
+									}
+								}else{
+									JOptionPane.showMessageDialog(null,"Incompatible page number provided! ", "Attention!", JOptionPane.ERROR_MESSAGE);
+								}
 							}
-
 						}else{
-							JOptionPane.showMessageDialog(null,"Write ',' terms in only one box and other leave empty! ", "Attention!", JOptionPane.ERROR_MESSAGE);
+							JOptionPane.showMessageDialog(null,"Some required page number fields are empty! ", "Attention!", JOptionPane.ERROR_MESSAGE);
 						}
-
-					}else if(!t4.getText().equals("")){
-						if(t4.getText().contains(",")){
-							String[] s=t4.getText().split(",");
-							splitpdf(s);
+					}else if(chk.isSelected()){
+						if(!t4.getText().equals("")){
+								if(t4.getText().contains(",")){
+									boolean schar=false;
+									String[] s=t4.getText().split(",");
+									for(int i=0;i<s.length;i++){
+										if(!checknumber(s[i])){
+											schar=true;
+										}
+									}
+									if(schar==false){
+										splitpdf(s);
+									}else{
+										JOptionPane.showMessageDialog(null,"Incompatible page number provided!", "Attention!", JOptionPane.ERROR_MESSAGE);
+									}
+								}else if(!t4.getText().contains(",")){
+									if(checknumber(t4.getText())){
+										String[] s={t4.getText()};
+										splitpdf(s);
+									}else{
+										JOptionPane.showMessageDialog(null,"Incompatible page number provided!", "Attention!", JOptionPane.ERROR_MESSAGE);
+									}
+								}
 						}else{
-							if(checknumber(t4.getText())){
-								String[] s={t4.getText()};
-								splitpdf(s);
-							}else if(checknumber(t4.getText())==false){
-								JOptionPane.showMessageDialog(null,"Incompatible page number provided! ", "Attention!", JOptionPane.ERROR_MESSAGE);
-							}
-							else{
-								JOptionPane.showMessageDialog(null,"Page numbers should be in both boxes! ", "Attention!", JOptionPane.ERROR_MESSAGE);
-							}}
-					}else if(!t5.getText().equals("")){
-						if(t5.getText().contains(",")){
-							String[] s=t5.getText().split(",");
-							splitpdf(s);
-						}else{
-							if(checknumber(t5.getText())){
-								String[] s={t5.getText()};
-								splitpdf(s);
-							}else if(checknumber(t5.getText())==false){
-								JOptionPane.showMessageDialog(null,"Incompatible page number provided! ", "Attention!", JOptionPane.ERROR_MESSAGE);
-							}
-							else{
-								JOptionPane.showMessageDialog(null,"Page numbers should be in both boxes! ", "Attention!", JOptionPane.ERROR_MESSAGE);
-							}
+							JOptionPane.showMessageDialog(null,"Some required page number fields are empty! ", "Attention!", JOptionPane.ERROR_MESSAGE);
 						}
 					}
 				}
+				
 			}
 			if(e.getSource()==bc1){
 				choose_file();	
@@ -325,6 +328,7 @@ public class splitPDF extends JFrame implements KeyListener {
 				try{
 					String sh="";
 					if(checkPDF(t1.getText())&&checkCreationPDF(t2.getText())){
+						String errors="";
 						Document doc=new Document();
 						PdfReader inp=new PdfReader(t1.getText());
 						PdfCopy copy = new PdfCopy(doc, new FileOutputStream(t2.getText()));
@@ -342,16 +346,17 @@ public class splitPDF extends JFrame implements KeyListener {
 								ev.printStackTrace();
 								sh=ev.getMessage();
 								if(sh.contains("Invalid page")){
-									//System.out.println(s);
+									System.out.println(s);
+									errors=errors+" "+s[i];
 								}else{
 									jtf.setText("Aborted Splitting page"+Integer.parseInt(s[i]));
 								}
 							}
 						}
 						doc.close(); 
-						if(!sh.equals("")){
-							jtf.setText("Saved pdf file: "+t2.getText()+" with some errors please check PDF");
-						}else if(sh.equals("")){
+						if(!sh.equals("")&&!errors.equals("")){
+							jtf.setText("Saved pdf file: "+t2.getText()+" with some errors in page numbers "+errors);
+						}else if(sh.equals("")&&errors.equals("")){
 							jtf.setText("Saved pdf file: "+t2.getText());
 						}else{
 							jtf.setText("Something went wrong during splitting!");
