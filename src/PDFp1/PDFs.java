@@ -623,9 +623,9 @@ public class PDFs extends JFrame implements KeyListener, TreeSelectionListener,P
 		filem.add(quitPdf);
 
 		flscmode=new JMenuItem("Enter Full Screen");
-		flscmode.setToolTipText("Full Screen Mode");
 		flscmode.setAction(fullScreenAction);
 		flscmode.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E,ActionEvent.ALT_MASK | ActionEvent.SHIFT_MASK));//Enter full Screen
+		flscmode.setToolTipText("Full Screen Mode");
 		flscmode.setMnemonic('e');
 		view.add(flscmode);
 
