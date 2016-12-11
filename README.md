@@ -38,14 +38,14 @@ Note: If you want the .jar executable file export the build using Eclipse.
 
 ## Features
 
-* Simple and nice front interface (PDF Viewer)
-* All commands on Menubar with keyboard shortcuts for quick navigation and usability
-* Easily navigable pages with page number and Next, Previous, Last and First buttons and goto page number box
-* Magnifier and Fit to screen feature for a PDF page
-* Single PDF file splitter which cuts out a one or more pages and make a new PDF file from them
-* Merging two or more PDF files and make it one PDF file
-* Simple Merger and Splitter interfaces for usbability and with a status notification area
-* About window because it should be included
+* Simple and nice front interface (PDF Viewer).
+* All commands on Menubar with keyboard shortcuts for quick navigation and usability.
+* Easily navigable pages with page number and Next, Previous, Last and First buttons and goto page number box.
+* Magnifier and Fit to screen feature for a PDF page.
+* Single PDF file splitter which cuts out one or more pages and make a new PDF file from them.
+* Merging two or more PDF files and make it one PDF file.
+* Simple Merger and Splitter interfaces for usability and with a status notification area.
+* About window because it should be included.
 
 ## Screen Shots
 
