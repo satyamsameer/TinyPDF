@@ -5,7 +5,7 @@ TinyPDF repository a lightweight Java/Swing UI based graphical user interface PD
 
 Tiny PDF is a JAVA based utility/software for light weight works on the PDFs.
 This utility can be said as a lightweight JAVA and Swing language based GUI tool for viewing, splitting and merging more than one PDF files.
-This only performs some basic functions such as PDF viewer, single PDF file Splitting/Cutout and multiple PDF file Merging. This is light software and have some limitations which will be mentioned in the end of the readme file. Anyone an try it out and reviews must be given to the author while using. Some bugs/errors may occur so kindly notify in a mean time.
+This only performs some basic functions such as PDF viewer, single PDF file Splitting/Cutout and multiple PDF file Merging. This is light software and have some limitations which will be mentioned in the end of the readme file. Anyone can try it out and reviews must be given to the author while using. Some bugs/errors may occur so kindly notify in a mean time.
 
 ### Prerequisites
 
