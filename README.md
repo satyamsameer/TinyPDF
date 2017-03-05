@@ -81,7 +81,7 @@ Sameer Satyam - Second Project - [satyamsameer](https://github.com/satyamsameer)
 
 This project is licensed under the [MIT License] (https://github.com/satyamsameer/TinyPDF/blob/master/LICENSE.md)
 
-## Acknowledgments
+## Acknowledgement
 
 * This is my second project while learning JAVA and software development.
 * Buffer memory is not implemented so PDF may load incomplete.
